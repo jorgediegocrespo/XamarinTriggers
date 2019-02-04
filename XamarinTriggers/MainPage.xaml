@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:XamarinTriggers" x:Class="XamarinTriggers.MainPage">
+    <StackLayout Margin="10,50">
+        <Label Text="Testing triggers" />
+        
+        <!---Property Trigger-->
+        <Label Text="Property trigger" />
+        <Entry Placeholder="write your name" Text="{Binding Name}">
+              <Entry.Triggers>
+                    <Trigger TargetType="Entry" Property="Text" Value="">
+                        <Setter Property="BackgroundColor" Value="Red" />
+                        <Setter Property="PlaceholderColor" Value="White" />
+                  </Trigger>
+              </Entry.Triggers>
+        </Entry>
+        
+        <!--Data Trigger-->
+        <Label Text="Data trigger" Margin="0,10,0,0" />
+        <Entry Placeholder="write your surname" Text="{Binding Surname}">
+              <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" Binding="{Binding Name}" Value="">
+                        <Setter Property="IsEnabled" Value="False" />
+                    </DataTrigger>
+              </Entry.Triggers>
+        </Entry>
+        
+        
+        <!--Multiple Trigger-->
+        <Label Text="Multiple trigger" Margin="0,10,0,0" />
+        <Button Text="Save" BackgroundColor="LightSeaGreen" TextColor="White" IsEnabled="false">
+              <Button.Triggers>
+                <MultiTrigger TargetType="Button">
+                  <MultiTrigger.Conditions>
+                     <BindingCondition Binding="{Binding Name}" Value="Name" />
+                     <BindingCondition Binding="{Binding Surname}" Value="Surname" />
+                  </MultiTrigger.Conditions>
+                  <Setter Property="IsEnabled" Value="true" />
+                </MultiTrigger>
+              </Button.Triggers>
+       </Button>
+        
+        <!--Event Trigger-->
+        <Label Text="Event trigger" Margin="0,20,0,0" />
+        <Button Text="Save" BackgroundColor="DarkCyan" TextColor="White">
+          <Button.Triggers>
+                 <EventTrigger Event="Clicked">
+                    <local:ExpandButtonTriggerAction />
+                </EventTrigger>
+           </Button.Triggers>
+        </Button>
+        
+        
+        
+        
+        
+    </StackLayout>
+</ContentPage>
